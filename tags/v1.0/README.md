@@ -15,6 +15,9 @@ On the **TODO** list:
 - [ ] Refactore Account.pm to use error checking Class
 - [ ] Make more indicators
 
+Donate:  
+btc: 1PAkGcnyhRzYhJciikWSufKtnCBnW3S4sF  
+ltc: LdajBDfWTpAPjvcNY2E2Xf1TTZ242oDxzb  
 
 
   
