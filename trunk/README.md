@@ -14,6 +14,10 @@ On the **TODO** list:
 - [ ] Move sell/buy checks to a separate error checking Class
 - [ ] Refactore Account.pm to use error checking Class
 - [ ] Make more indicators
+- [ ] Send email on buy/sells
+- [ ] Use a config file to remove literals
+
+
 
 Donate:  
 btc: 1PAkGcnyhRzYhJciikWSufKtnCBnW3S4sF  
