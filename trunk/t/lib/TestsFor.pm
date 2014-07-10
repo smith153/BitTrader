@@ -10,7 +10,8 @@ INIT {
 
 
 #These run for EACH class
-sub startup : Tests(startup) 
+#runs before each class load
+sub startup : Tests(startup)
 {
   my $test = shift();
   my $class = ref $test;
@@ -19,8 +20,12 @@ sub startup : Tests(startup)
   die $@ if $@;
   $test->class_to_test($class);
 }
+#runs before each method call
 sub setup : Tests(setup) {}
+#runs after each method call
 sub teardown : Tests(teardown) {}
+#runs after each class ends
 sub shutdown : Tests(shutdown) {}
+
 
 1;
