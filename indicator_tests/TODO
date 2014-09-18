@@ -1,0 +1,10 @@
+use stoch osc with 20 day average and 1 day average:
+http://www.incrediblecharts.com/indicators/stochastic.php
+
+make each indicator have a stats methods to display stats
+
+use one array for both 1 day and 14 day average:
+List::MoreUtils
+use List::Util qw/sum/;
+my $last_24_sum = sum @array[-24 .. $#$array]; 
+
