@@ -51,8 +51,8 @@ sub daemonize
 	setsid or die "Can't start a new session: $!";
 	umask 0;
 	close $_ or die $! for @fh_unused;
-	open STDOUT, ">>$ENV{HOME}load_btce.log" or die "Can't write to log $!";
-	open STDERR, ">>$ENV{HOME}load_btce.log" or die "Can't write to log $!";
+	open STDOUT, ">>$ENV{HOME}/load_btce.log" or die "Can't write to log $!";
+	open STDERR, ">>$ENV{HOME}/load_btce.log" or die "Can't write to log $!";
 }
 
 
