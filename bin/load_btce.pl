@@ -6,6 +6,10 @@ use DBI;
 use Finance::btce;
 use BitTrader::Config;
 
+#monitor tickers on btc-e.com, 
+#insert values into DB for later testing
+
+
 my $cfg = BitTrader::Config->new();
 
 sub mysql_connect
