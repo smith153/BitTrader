@@ -15,7 +15,7 @@ On the **TODO** list:
 - [ ] Refactore Account.pm to use error checking Class
 - [ ] Make more indicators
 - [ ] Send email on buy/sells
-- [ ] Use a config file to remove literals
+- [x] Use a config file to remove literals
 
 
 
