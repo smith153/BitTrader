@@ -1,3 +1,7 @@
+v1.2 Thu Sep 18 16:55:32 CDT 2014
+	-move binaries into bin/
+	-new version of load_btce.pl
+
 v1.1 Thu Sep 18 16:10:32 CDT 2014
 	-Rebase from svn repo
 	-Add more namespaces
