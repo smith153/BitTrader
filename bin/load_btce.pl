@@ -5,6 +5,7 @@ use POSIX qw(setsid);
 use DBI;
 use Finance::btce;
 use Time::HiRes qw/time sleep/;
+use BitTrader::Config;
 
 
 #monitor tickers on btc-e.com, 
@@ -20,7 +21,6 @@ $SIG{TERM} = sub{
 	warn get_time() . "Killing child processes\n";
 	kill 'TERM', @pids;
 	warn get_time() . "Exiting\n";
-	exit;
 };
 
 

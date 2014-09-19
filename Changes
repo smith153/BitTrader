@@ -1,3 +1,7 @@
+v1.2.1 Fri Sep 19 10:38:29 CDT 2014
+	-Config::File::Simple since it uses less memory
+	-Typos in load_btce.pl and load_check.sh
+
 v1.2 Thu Sep 18 16:55:32 CDT 2014
 	-move binaries into bin/
 	-new version of load_btce.pl
