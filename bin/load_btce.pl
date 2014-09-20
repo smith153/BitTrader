@@ -32,7 +32,7 @@ sub mysql_connect
 	my $user = "btce";
 	my $pw = $cfg->get_var("db_pass");
 	my $dsn = "dbi:Pg:database=$database;host=$host";
-	return  DBI->connect_cached($dsn, $user, $pw) || die "Unable to connect: $DBI::errstr\n";
+	return  DBI->connect_cached($dsn, $user, $pw);
 }
 
 sub get_time
