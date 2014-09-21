@@ -21,6 +21,7 @@ $SIG{TERM} = sub{
 	warn get_time() . "Killing child processes\n";
 	kill 'TERM', @pids;
 	warn get_time() . "Exiting\n";
+	exit;
 };
 
 
@@ -129,7 +130,7 @@ while( my $sym = pop(@symbols)){
 	die "Fork failed\n" if($pid == -1);
 
 	if($pid == 0){ #in child
-		$SIG{TERM} = sub { exit; };
+		$SIG{TERM} = sub { print "Child $$ exiting\n"; exit; };
 		insert2($sym,$btce);
 	}
 	else{
@@ -138,7 +139,7 @@ while( my $sym = pop(@symbols)){
 
 }
 
-while( my $pid = pop(@pids)){
+foreach my $pid (@pids){
 	waitpid($pid,0);	
 }
 
