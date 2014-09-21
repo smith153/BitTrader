@@ -1,7 +1,7 @@
 Tired of watching the bitcoin market go **up** and **down** while you make **no** money?
 
-Herein lies the purpose of btce_trader. It uses standard stock trader indicators like stochastic oscillators 
-and moving averages to determine buy/sell points. With these indicators, btce_trader will buy and sell currencies
+Herein lies the purpose of BitTrader. It uses standard stock trader indicators like stochastic oscillators 
+and moving averages to determine buy/sell points. With these indicators, BitTrader will buy and sell currencies
 on the btc-e.com exchange.
 
 The only points worth showing off is the full test-suite in t/ and the indicator interface in lib/Indicator.pm

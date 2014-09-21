@@ -11,7 +11,7 @@ use BitTrader::Config;
 #monitor tickers on btc-e.com, 
 #insert values into DB for later testing
 #runs as daemon if @ARGV > 0
-#creates one child perl symbol
+#creates one child per symbol
 
 my @pids;
 my $cfg = BitTrader::Config->new();
