@@ -1,4 +1,4 @@
-package BitTrader::DB_Handle;
+package BitTrader::Role::DB_Handle;
 
 use namespace::autoclean;
 use Moose::Role;
@@ -29,4 +29,21 @@ sub db_connect
 
 
 1;
+
+__END__
+
+=head1 NAME
+BitTrader::Role::DB_Handle
+=head1 SYNOPSIS
+
+	use BitTrader::Role::DB_Handle
+	$self->db_connect("password");
+	my $qh = $self->prepare("select count(*) from table");
+	$self->db_disconnect();
+
+=head1 DESCRIPTION
+
+Moose role to include a database handle
+
+=cut
 
