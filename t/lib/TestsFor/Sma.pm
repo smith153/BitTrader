@@ -21,7 +21,7 @@ sub setup : Test(setup)
 } 
 
 
-sub constructor : Test(3) 
+sub constructor : Test(4) 
 { 
 
 	my $test = shift();
@@ -53,7 +53,7 @@ sub my_methods : Test(5)
 	can_ok $class, '_shift_value';
 } 
 
-sub sma : Test(3)
+sub sma : Test(4)
 {
 	my $test = shift();
 	my $self = $test->default_Sma();
