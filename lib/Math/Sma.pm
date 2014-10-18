@@ -39,10 +39,12 @@ sub sma
 
 	#return simple avg if not enough periods
 	if(@{$values} < $size){
-		return sprintf("%.2f", $self->_raw_average());
+		$self->_set_last_avg($self->_raw_average());
+		return sprintf("%.2f", $self->last_avg());
+
 	}
 
-	if( not defined $last ){
+	if(@{$values} == $size){
 		$self->_set_last_avg($self->_raw_average());
 		return sprintf("%.2f", $self->last_avg());
 	}
