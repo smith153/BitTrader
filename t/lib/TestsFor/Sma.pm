@@ -61,18 +61,13 @@ sub sma : Test(3)
 	my $value = 4;
 	$value = $self->sma($value);
 	is $value, "4.00", "Avg is 4.00";
-	$value = $self->ewa(8);
+	$value = $self->sma(8);
 	is $value, "6.00", "Avg is 6.00";
-	$value = $self->ewa(7);
+	$value = $self->sma(7);
 	is $value, "6.33", "Avg is 6.33";
-	$value = $self->ewa(9);
+	$value = $self->sma(9);
 	is $value, "8.00", "Avg is 8.00";  
 }
 
 1;
-
-
- -v1.2.2 
-+v1.2.2
-        -Exit correctly in load_btce.pl
 
