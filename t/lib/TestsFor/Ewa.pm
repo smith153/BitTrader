@@ -9,7 +9,6 @@ sub startup : Test(startup)
 	$test->SUPER::startup;
 	my $class = ref $test;
 	$class->mk_classdata('default_Ewa');
-
 }
 
 
@@ -19,8 +18,6 @@ sub setup : Test(setup)
 	$test->SUPER::setup();
 
 	$test->default_Ewa( $test->class_to_test->new( alpha => 0.5));
-
-
 } 
 
 
@@ -64,3 +61,7 @@ sub ewa : Test(3)
 	$value = $self->ewa(7);
 	is $value, 6.5, "Avg is 6.5";  
 }
+
+1;
+
+

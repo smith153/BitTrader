@@ -11,7 +11,7 @@ has size => (
 has last_avg => (
 	is =>'ro',
 	isa => 'Num',
-	writer = > '_set_last_avg',
+	writer => '_set_last_avg',
 );
 
 has _values => (
@@ -58,7 +58,7 @@ sub sma
 sub _raw_average
 {
 	my $self = shift();
-	my $size = @{$self->_values()};
+	my $size = @{$self->_values()} || 1;
 	my $total = 0;
 	foreach (@{$self->_values}){
 		$total += $_;
