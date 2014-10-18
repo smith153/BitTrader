@@ -55,11 +55,11 @@ sub ewa : Test(3)
 
 	my $value = 4;
 	$value = $self->ewa($value);
-	is $value, 4, "Avg is 4";
+	is $value, "4.00", "Avg is 4.00";
 	$value = $self->ewa(8);
-	is $value, 6, "Avg is 6";
+	is $value, "6.00", "Avg is 6.00";
 	$value = $self->ewa(7);
-	is $value, 6.5, "Avg is 6.5";  
+	is $value, "6.50", "Avg is 6.50";  
 }
 
 1;

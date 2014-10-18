@@ -60,13 +60,13 @@ sub sma : Test(3)
 
 	my $value = 4;
 	$value = $self->sma($value);
-	is $value, 4, "Avg is 4";
+	is $value, "4.00", "Avg is 4.00";
 	$value = $self->ewa(8);
-	is $value, 6, "Avg is 6";
+	is $value, "6.00", "Avg is 6.00";
 	$value = $self->ewa(7);
-	is $value, 6.33, "Avg is 6.33";
+	is $value, "6.33", "Avg is 6.33";
 	$value = $self->ewa(9);
-	is $value, 8, "Avg is 8";  
+	is $value, "8.00", "Avg is 8.00";  
 }
 
 1;
