@@ -28,7 +28,7 @@ sub constructor : Test(3)
 	my $class = $test->class_to_test();
 	can_ok $class, 'new';
 	throws_ok {$class->new()} qr/Attribute.*required/, "Creating a $class without attributes should fail.";
-	throws_ok {$class->new()} qr/Attribute.*constraint/, "Creating a $class with float should fail";
+	throws_ok {$class->new(size => 1.5)} qr/Attribute.*constraint/, "Creating a $class with float should fail";
 	isa_ok $test->default_Sma, $class;
 }
 
@@ -72,4 +72,7 @@ sub sma : Test(3)
 1;
 
 
- 
+ -v1.2.2 
++v1.2.2
+        -Exit correctly in load_btce.pl
+
