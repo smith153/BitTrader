@@ -8,7 +8,7 @@ has size => (
 	required => '1',
 );
 
-has _last_avg => (
+has last_avg => (
 	is =>'ro',
 	isa => 'Num',
 	writer = > '_set_last_avg',
@@ -29,7 +29,7 @@ has _values => (
 sub sma
 {
 	my ($self, $current) = @_;
-	my $last = $self->_last_avg();
+	my $last = $self->last_avg();
 	my $values = $self->_values();
 	my $size = $self->size();
 	my $avg;
@@ -44,7 +44,7 @@ sub sma
 
 	if( not defined $last ){
 		$self->_set_last_avg($self->_raw_average());
-		return sprintf("%.2f", $self->_last_avg());
+		return sprintf("%.2f", $self->last_avg());
 	}
 
 	my $obsolete = $self->_shift_value();
@@ -75,20 +75,24 @@ __PACKAGE__->meta->make_immutable;
 __END__
 
 =head1 NAME
-BitTrader::Math::Sma
+
+Math::Sma
+
 =head1 SYNOPSIS
 
-    use BitTrader::Math::Sma;
-	my $sma = BitTrader::Math::Sma->new(size => $n);
+    use Math::Sma;
+	my $sma = Math::Sma->new(size => $n);
 	$sma->sma($value);
+
 =head1 DESCRIPTION
 
 Implements a simple moving average of N periods
 L<http://en.wikipedia.org/wiki/Moving_average>
 
 =head2 new
+
 Create a new Sma object of C<$n> periods.
-	my $sma = BitTrader::Math::Sma->new($n);
+	my $sma = Math::Sma->new($n);
 
 =head2 sma
 

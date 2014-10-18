@@ -1,6 +1,7 @@
 v1.3
 	-Exit correctly in load_btce.pl
-	-
+	-Add Math:: namespace and modules Ewa,Sma
+	-Add Math:: tests
 
 v1.2.1 Fri Sep 19 10:38:29 CDT 2014
 	-Use Config::File::Simple since it uses less memory

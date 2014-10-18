@@ -30,15 +30,15 @@ sub ewa
 }
 
 
-
-
 __PACKAGE__->meta->make_immutable;
 1;
 
 __END__
 
 =head1 NAME
+
 Math::Ewa
+
 =head1 SYNOPSIS
 
     use Math::Ewa;
@@ -51,6 +51,7 @@ Implements a exponential moving average with a weight of C<$alpha>
 L<http://en.wikipedia.org/wiki/Moving_average>
 
 =head2 new
+
 Create a new Ewa object with alpha C<$n>.
 	my $ewa = Math::Ewa->new($n);
 An alpha value of 2/(N+1) is roughly equivalent to a simple moving average of N periods
