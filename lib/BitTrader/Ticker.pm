@@ -4,6 +4,7 @@ use namespace::autoclean;
 use BitTrader::Indicator::Ma;
 use BitTrader::Indicator::StochOsc;
 use BitTrader::Indicator::StochFast;
+use BitTrader::Config;
 with 'MooseX::Log::Log4perl';
 
 

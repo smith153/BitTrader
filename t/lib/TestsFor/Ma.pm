@@ -1,5 +1,6 @@
 package TestsFor::BitTrader::Indicator::Ma;
 use Test::Most;
+use Math::Ewa;
 use base 'TestsFor';
 
 
@@ -19,10 +20,10 @@ sub setup : Test(setup)
 	$test->SUPER::setup();
 
 	$test->default_Ma( $test->class_to_test->new(
-		avg => 5,
-		avg_slow => 4,
-		avg_slower => 3,
-		avg_slowest => 2,
+		avg => Math::Ewa->new(last_avg => 5, alpha => 1/8),
+		avg_slow => Math::Ewa->new(last_avg => 4, alpha => 1/16),
+		avg_slower => Math::Ewa->new(last_avg => 3, alpha => 1/32),
+		avg_slowest => Math::Ewa->new(last_avg => 2, alpha => 1/128),
 		)
 	);
 
@@ -77,13 +78,13 @@ sub price : Test(4)
 {
 	my $test = shift();
 	my $self = $test->default_Ma();
-	my $avg = $self->avg();
-	my $avg_slow = $self->avg_slow();
+	my $avg = $self->avg->last_avg();
+	my $avg_slow = $self->avg_slow->last_avg();
 	ok( (not $self->price()),"Price shouldn't be set");
 	$self->set_price(10);
 	is $self->price, 10, "Price is 10";
-	ok $self->avg != $avg, "Average needs to change";
-	ok $self->avg_slow != $avg_slow, "Average_slow needs to change";
+	ok $self->avg->last_avg() != $avg, "Average needs to change";
+	ok $self->avg_slow->last_avg() != $avg_slow, "Average_slow needs to change";
 
 }
 
