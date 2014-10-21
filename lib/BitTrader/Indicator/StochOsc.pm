@@ -1,7 +1,7 @@
 package BitTrader::Indicator::StochOsc;
 use namespace::autoclean;
 use Moose;
-with 'BitTrader::Ewa';
+use Math::Sma;
 with 'BitTrader::Indicator';
 
 has '_stoch_que' => ( is =>'ro',  isa => 'ArrayRef[Num]', default => sub {[]} ,);
@@ -11,6 +11,10 @@ has 'stoch_size' => ( is => 'ro', isa => 'Int', default => 1440);
 has 'k' => ( is => 'ro', isa => 'Num', writer => '_set_k',);
 
 has 'd' => ( is => 'ro', isa => 'Num', writer => '_set_d',);
+
+has '_d_avg' => ( is => 'ro', isa => 'Math::Sma',
+	default => sub {return Math::Ewa->new(size => 11)},
+);
 
 
 
@@ -27,8 +31,7 @@ sub _update_indicator
 
   $self->_set_k($k);
 
-  $d = $self->ewa($k,$d,1/6);
-  $self->_set_d($d);
+  $self->_set_d($self->_d_avg->sma($k));
 
 }
 
