@@ -82,7 +82,7 @@ sub _stochOsc : Test(1)
 	$self->set_price(1);
 	$self->set_price(2);
 	$self->set_price(3);
-	is $self->k, '87.50', "K should be 100";  
+	is $self->k, '100.00', "K should be 100";  
 }
 
 sub price : Test(5)
