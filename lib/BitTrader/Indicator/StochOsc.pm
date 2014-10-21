@@ -13,7 +13,7 @@ has 'k' => ( is => 'ro', isa => 'Num', writer => '_set_k',);
 has 'd' => ( is => 'ro', isa => 'Num', writer => '_set_d',);
 
 has '_d_avg' => ( is => 'ro', isa => 'Math::Sma',
-	default => sub {return Math::Ewa->new(size => 11)},
+	default => sub {return Math::Sma->new(size => 11)},
 );
 
 
