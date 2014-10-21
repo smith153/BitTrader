@@ -1,8 +1,7 @@
 package BitTrader::Indicator::StochFast;
 use namespace::autoclean;
-use Data::Dumper;
 use Moose;
-with 'BitTrader::Ewa';
+use Math::Sma;
 with 'BitTrader::Indicator';
 
 has '_stoch_que' => ( is =>'ro',  isa => 'ArrayRef[Num]', default => sub {[]} ,);
@@ -12,6 +11,14 @@ has 'stoch_size' => ( is => 'ro', isa => 'Int', default => 165);
 has 'k' => ( is => 'ro', isa => 'Num', writer => '_set_k',);
 
 has 'd' => ( is => 'ro', isa => 'Num', writer => '_set_d',);
+
+has '_k_avg' => ( is => 'ro', isa => 'Math::Sma',
+	default => sub {return Math::Sma->new(size => 3)},
+);
+
+has '_d_avg' => ( is => 'ro', isa => 'Math::Sma',
+	default => sub {return Math::Sma->new(size => 31)},
+);
 
 
 
@@ -37,8 +44,7 @@ sub _stochOsc
   my $high;
   my $low;
   my $k;
-  my $kk = $self->k();
-  my $d = $self->d();
+  my $d;
   my $size = $self->stoch_size();
 
   if($cur < 1){
@@ -64,11 +70,9 @@ sub _stochOsc
   }
 
   $k = 100*(($cur-$low)/($high-$low));
-#  $k = sprintf("%.2f",$k);
-  $d = $self->ewa($k,$d,1/16);
-  $kk = $self->ewa($k,$kk,1/2);
-  $self->_set_k($kk);
-  $self->_set_d($d);
+
+  $self->_set_k($self->_k_avg->sma($k));
+  $self->_set_d($self->_d_avg->sma($k));
 
 }
 
