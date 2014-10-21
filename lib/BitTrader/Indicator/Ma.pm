@@ -59,6 +59,15 @@ sub should_sell
 
 }
 
+sub status
+{
+	my $l    = sprintf("%.2f", $self->avg->last_avg() );
+	my $ll   = sprintf("%.2f", $self->avg_slow->last_avg() );
+	my $lll  = sprintf("%.2f", $self->avg_slower->last_avg() );
+	my $llll = sprintf("%.2f", $self->avg_slowest->last_avg() );
+
+	return "Averages (fastest to slowest): $l, $ll, $lll, $llll\n";
+}
 
 __PACKAGE__->meta->make_immutable;
 1;

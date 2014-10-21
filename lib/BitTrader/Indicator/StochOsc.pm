@@ -96,6 +96,11 @@ sub should_sell
 
 }
 
+sub status
+{
+	my $self = shift();
+	return "StockOsc status: K: ${\$self->k} D: ${\$self->d}\n";
+}
 
 
 __PACKAGE__->meta->make_immutable;
