@@ -9,6 +9,7 @@ has 'price' => ( is => 'ro', isa => 'Num',writer => 'set_price', trigger => \&_u
 requires '_update_indicator';
 requires 'should_buy';
 requires 'should_sell';
+requires 'status';
 
 sub _update
 {
