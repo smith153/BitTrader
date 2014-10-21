@@ -38,7 +38,7 @@ sub constructor : Test(2)
 	isa_ok $test->default_StochFast, $class;
 }
 
-sub attributes : Test(5)
+sub attributes : Test(7)
 {
 	my $test = shift();
 	my $class = $test->class_to_test();
@@ -47,6 +47,8 @@ sub attributes : Test(5)
 	can_ok $class, "stoch_size";
 	can_ok $class, "k";
 	can_ok $class, "d";
+	can_ok $class, "_k_avg";
+	can_ok $class, "_d_avg";
 }
 
 sub my_methods : Test(4)
