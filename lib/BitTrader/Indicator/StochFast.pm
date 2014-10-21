@@ -82,7 +82,7 @@ sub should_buy
 {
   my $self = shift();
 
-  if($self->k() > $self->d() and $self->d > 69  and $self->d() < 71  ){
+  if($self->k() > $self->d() and $self->d > 68  and $self->d() < 72  ){
 	return 1;
   }
   return 0;
