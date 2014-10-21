@@ -5,16 +5,16 @@ use Math::Ewa;
 with 'BitTrader::Indicator';
 
 has 'avg' => (	is => 'ro', isa => 'Math::Ewa',
-		default => sub {return Math::Ewa->new(alpha => 1/8)},
+	default => sub {return Math::Ewa->new(alpha => 1/8)},
 );
 has 'avg_slow' => (	is => 'ro', isa => 'Math::Ewa',
-		default => sub {return Math::Ewa->new(alpha => 1/16)},
+	default => sub {return Math::Ewa->new(alpha => 1/16)},
 );
 has 'avg_slower' => (	is => 'ro', isa => 'Math::Ewa',
-		default => sub {return Math::Ewa->new(alpha => 1/32)},
+	default => sub {return Math::Ewa->new(alpha => 1/32)},
 );
 has 'avg_slowest' => (	is => 'ro', isa => 'Math::Ewa',
-		default => sub {return Math::Ewa->new(alpha => 1/128)},
+	default => sub {return Math::Ewa->new(alpha => 1/128)},
 );
 
 
