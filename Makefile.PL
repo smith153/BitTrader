@@ -9,6 +9,7 @@ WriteMakefile(
 		'Moose' => '0',
 		'Math::SMA' => '0',
 		'Math::EWMA' => '0',
+		'Finance::btce' => '0',
 	},
 	'TEST_REQUIRES' => {
 		'Test::Class::Load' => '0',
