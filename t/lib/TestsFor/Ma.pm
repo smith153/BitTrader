@@ -1,6 +1,6 @@
 package TestsFor::BitTrader::Indicator::Ma;
 use Test::Most;
-use Math::Ewa;
+use Math::EWMA;
 use base 'TestsFor';
 
 
@@ -20,10 +20,10 @@ sub setup : Test(setup)
 	$test->SUPER::setup();
 
 	$test->default_Ma( $test->class_to_test->new(
-		avg => Math::Ewa->new(last_avg => 5, alpha => 1/8),
-		avg_slow => Math::Ewa->new(last_avg => 4, alpha => 1/16),
-		avg_slower => Math::Ewa->new(last_avg => 3, alpha => 1/32),
-		avg_slowest => Math::Ewa->new(last_avg => 2, alpha => 1/128),
+		avg => Math::EWMA->new(last_avg => 5, alpha => 1/8),
+		avg_slow => Math::EWMA->new(last_avg => 4, alpha => 1/16),
+		avg_slower => Math::EWMA->new(last_avg => 3, alpha => 1/32),
+		avg_slowest => Math::EWMA->new(last_avg => 2, alpha => 1/128),
 		)
 	);
 
