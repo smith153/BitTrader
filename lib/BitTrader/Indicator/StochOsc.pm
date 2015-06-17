@@ -1,7 +1,7 @@
 package BitTrader::Indicator::StochOsc;
 use namespace::autoclean;
 use Moose;
-use Math::Sma;
+use Math::SMA;
 with 'BitTrader::Indicator';
 
 has '_stoch_que' => ( is =>'ro',  isa => 'ArrayRef[Num]', default => sub {[]} ,);
@@ -12,8 +12,8 @@ has 'k' => ( is => 'ro', isa => 'Num', writer => '_set_k',);
 
 has 'd' => ( is => 'ro', isa => 'Num', writer => '_set_d',);
 
-has '_d_avg' => ( is => 'ro', isa => 'Math::Sma',
-	default => sub {return Math::Sma->new(size => 11)},
+has '_d_avg' => ( is => 'ro', isa => 'Math::SMA',
+	default => sub {return Math::SMA->new(size => 11)},
 );
 
 
