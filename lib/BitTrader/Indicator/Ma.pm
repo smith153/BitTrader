@@ -61,6 +61,7 @@ sub should_sell
 
 sub status
 {
+	my $self = shift();
 	my $l    = sprintf("%.2f", $self->avg->last_avg() );
 	my $ll   = sprintf("%.2f", $self->avg_slow->last_avg() );
 	my $lll  = sprintf("%.2f", $self->avg_slower->last_avg() );
