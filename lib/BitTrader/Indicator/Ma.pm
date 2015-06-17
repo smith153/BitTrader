@@ -22,10 +22,10 @@ sub _update_indicator
 {
 	my ($self, $cur) = @_;
 
-	$self->avg->ewa($cur);
-	$self->avg_slow->ewa($cur);
-	$self->avg_slower->ewa($cur);
-	$self->avg_slowest->ewa($cur);
+	$self->avg->ewma($cur);
+	$self->avg_slow->ewma($cur);
+	$self->avg_slower->ewma($cur);
+	$self->avg_slowest->ewma($cur);
 
 }
 
