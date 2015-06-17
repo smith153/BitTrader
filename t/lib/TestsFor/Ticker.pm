@@ -45,7 +45,7 @@ sub constructor : Test(3)
 	isa_ok $test->default_Ticker, $class;
 }
 
-sub attributes : Test(10)
+sub attributes : Test(9)
 {
 	my $test = shift();
 	my $class = $test->class_to_test();
@@ -53,7 +53,6 @@ sub attributes : Test(10)
 	can_ok $class, "amount";
 	can_ok $class, "price";
 	can_ok $class, "last_action";
-	can_ok $class, "order_id";
 	can_ok $class, "indicator";
 	can_ok $class, "Ma";
 	can_ok $class, "StochOsc";

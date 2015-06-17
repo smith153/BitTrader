@@ -19,8 +19,6 @@ has 'last_action' => ( is => 'rw', isa => 'Str', default => '0');
 
 has '_file' => ( is => 'ro', isa => 'Str', default => '/tmp/.indicator2');
 
-has 'order_id' => (is => 'rw', isa => 'Str' );
-
 has 'indicator' => (is => 'ro', does => 'BitTrader::Indicator', writer => '_set_indicator', );
 
 has 'Ma' => ( is => 'ro', isa => 'BitTrader::Indicator::Ma', writer => '_set_Ma', 
