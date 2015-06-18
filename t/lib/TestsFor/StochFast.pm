@@ -51,7 +51,7 @@ sub attributes : Test(7)
 	can_ok $class, "_d_avg";
 }
 
-sub my_methods : Test(4)
+sub my_methods : Test(5)
 {
 	my $test = shift();
 	my $class = $test->class_to_test();
@@ -59,6 +59,7 @@ sub my_methods : Test(4)
 	can_ok $class, '_stochOsc';
 	can_ok $class, 'should_buy';
 	can_ok $class, 'should_sell';
+	can_ok $class, 'status';
 }
 
 sub should_sell : Test(1)
