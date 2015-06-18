@@ -14,8 +14,6 @@ has 'price' => ( is => 'ro', isa => 'Num',writer => 'set_price', trigger => \&_u
 
 has 'last_action' => ( is => 'rw', isa => 'Str', default => '0');
 
-has '_file' => ( is => 'ro', isa => 'Str', default => '/tmp/.indicator2');
-
 has 'cur_indicator' => (is => 'ro', does => 'BitTrader::Indicator', writer => '_set_indicator', );
 
 has '_indicators' => (
