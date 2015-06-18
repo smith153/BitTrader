@@ -33,7 +33,7 @@ has '_indicators' => (
 has '_cfg' => (
 	is => 'ro',
 	isa => 'BitTrader::Config',
-	writer => '_set_cfg',
+	default => sub { BitTrader::Config->new(); },
 );
 
 
@@ -42,7 +42,6 @@ sub BUILD
 {
   my $self = shift();
 
-  $self->_set_cfg(BitTrader::Config->new() );
 
   foreach my $indicator (split( /,/,$self->_cfg->get_var('indicators')) ){
 	my $module = "BitTrader::Indicator::$indicator";
