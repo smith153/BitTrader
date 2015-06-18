@@ -51,27 +51,48 @@ sub attributes : Test(5)
 	can_ok $class, "avg_slowest";
 }
 
-sub my_methods : Test(3)
+sub my_methods : Test(4)
 {
 	my $test = shift();
 	my $class = $test->class_to_test();
 	can_ok $class, '_update_indicator';
 	can_ok $class, 'should_buy';
 	can_ok $class, 'should_sell';
+	can_ok $class, 'status';
 }
 
-sub should_sell : Test(1)
+sub should_sell : Test(3)
 {
 	my $test = shift();
 	my $self = $test->default_Ma;
 	is $self->should_sell, 0, "Market trending, we shouldn't sell";
+
+	for(my $i = 0; $i < 400; ++$i){
+		$self->set_price($i);
+	}
+
+
+	for(my $i = 400; $i > 100; --$i){
+		$self->set_price($i);
+	}
+
+	ok $self->should_sell, "Falling, we should sell";
+	ok !$self->should_buy, "Falling, we shouldn't buy";
 }
 
-sub should_buy : Test(1)
+sub should_buy : Test(3)
 {
 	my $test = shift();
 	my $self = $test->default_Ma;
 	is $self->should_buy, 1, "Market trending, we should buy";
+
+	for(my $i = 0; $i < 400; ++$i){
+		$self->set_price($i);
+	}
+
+	ok $self->should_buy, "Trending, we should buy";
+	ok !$self->should_sell, "Trending, we shouldn't sell";
+
 }
 
 sub price : Test(4)
