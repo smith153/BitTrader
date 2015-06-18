@@ -45,7 +45,7 @@ sub constructor : Test(3)
 	isa_ok $test->default_Ticker, $class;
 }
 
-sub attributes : Test(9)
+sub attributes : Test(7)
 {
 	my $test = shift();
 	my $class = $test->class_to_test();
@@ -53,14 +53,12 @@ sub attributes : Test(9)
 	can_ok $class, "amount";
 	can_ok $class, "price";
 	can_ok $class, "last_action";
-	can_ok $class, "indicator";
-	can_ok $class, "Ma";
-	can_ok $class, "StochOsc";
-	can_ok $class, "StochFast";
+	can_ok $class, "indicators";
+	can_ok $class, "cur_indicator";
 	can_ok $class, "_cfg";
 }
 
-sub my_methods : Test(5)
+sub my_methods : Test(9)
 {
 	my $test = shift();
 	my $class = $test->class_to_test();
@@ -69,6 +67,11 @@ sub my_methods : Test(5)
 	can_ok $class, '_update_indicators';
 	can_ok $class, 'should_buy';
 	can_ok $class, 'should_sell';
+	can_ok $class, '_add_indicator';
+	can_ok $class, '_get_indicator';
+	can_ok $class, '_list_indicators';
+	can_ok $class, '_indicator_valid';
+	can_ok $class, '_set_cfg';
 }
 
 sub get_indicator : Test(3)

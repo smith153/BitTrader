@@ -1,10 +1,7 @@
 package BitTrader::Ticker;
 use Moose;
-use namespace::autoclean;
-use BitTrader::Indicator::Ma;
-use BitTrader::Indicator::StochOsc;
-use BitTrader::Indicator::StochFast;
 use BitTrader::Config;
+use namespace::autoclean;
 with 'MooseX::Log::Log4perl';
 
 
@@ -19,29 +16,18 @@ has 'last_action' => ( is => 'rw', isa => 'Str', default => '0');
 
 has '_file' => ( is => 'ro', isa => 'Str', default => '/tmp/.indicator2');
 
-has 'indicator' => (is => 'ro', does => 'BitTrader::Indicator', writer => '_set_indicator', );
+has 'cur_indicator' => (is => 'ro', does => 'BitTrader::Indicator', writer => '_set_indicator', );
 
-has 'Ma' => ( is => 'ro', isa => 'BitTrader::Indicator::Ma', writer => '_set_Ma', 
-	handles =>{
-		avg => 'avg',
-		avg_slow => 'avg_slow',
-		avg_slower => 'avg_slower',
-		avg_slowest => 'avg_slowest',
-	},
-);
-
-has 'StochOsc' => (is => 'ro', isa => 'BitTrader::Indicator::StochOsc', writer => '_set_StochOsc', 
+has '_indicators' => (
+	is => 'ro', 
+	isa => 'HashRef[BitTrader::Indicator]', 
+	traits  => ['Hash'],
 	handles => {
-		k => 'k',
-		d => 'd',
-	},
-);
-
-has 'StochFast' => (is => 'ro', isa => 'BitTrader::Indicator::StochFast', writer => '_set_StochFast', 
-	handles => {
-		k_fast => 'k',
-		d_fast => 'd',
-	},
+		_add_indicator => 'set',
+		_get_indicator => 'get',
+		_list_indicators => 'keys',
+		_indicator_valid => 'exists',
+	}
 );
 
 has '_cfg' => (
@@ -55,23 +41,15 @@ has '_cfg' => (
 sub BUILD
 {
   my $self = shift();
-  my $file = $self->_file();
-  if(not -e $file){
-	open(my $fh, ">$file");
-	print $fh "StochFast";
-	close($fh);
-  }
-	$self->_set_cfg(BitTrader::Config->new() );
-#  $self->_set_indicator(" ");
 
-  $self->_set_Ma( BitTrader::Indicator::Ma->new() );
-  $self->_set_StochOsc( BitTrader::Indicator::StochOsc->new() );
-  if($self->symbol() eq 'btc'){
-	$self->_set_StochFast( BitTrader::Indicator::StochFast->new(stoch_size => 165) );
+  $self->_set_cfg(BitTrader::Config->new() );
+
+  foreach my $indicator (split( /,/,$self->_cfg->get_var('indicators')) ){
+	my $module = "BitTrader::Indicator::$indicator";
+	eval "require $module" or die $@;
+	$self->_add_indicator($indicator => $module->new() );
   }
-  elsif($self->symbol eq 'ltc'){
-	$self->_set_StochFast( BitTrader::Indicator::StochFast->new(stoch_size => 244) );
-  }
+
   $self->get_indicator();
 }
 
@@ -88,50 +66,39 @@ sub ticker_status
 sub get_indicator
 {
   my $self = shift();
-  my $file = $self->_file();
   my $txt;
-  my $old = ( $self->indicator() ) ?  blessed $self->indicator() : "";
-  my $new;
-  open(my $fh, "<$file");
-  $txt = <$fh>;
-  chomp($txt);
-  if($txt !~ /Ma|StochOsc|StochFast/){
-	$self->log->error("Indicator does not match ma or stoch! Forcing StochFast!");
-	$self->_set_indicator($self->StochFast() );
+  my $old = ( $self->cur_indicator() ) ?  (split( /\:\:/, blessed $self->cur_indicator()))[2] : "";
+  my $new = $self->_cfg->get_var('cur_indicator');
+
+  return if ($old eq $new);
+
+  $self->_set_indicator($self->_get_indicator($new));
+
+  if(not $self->_indicator_valid($new) ){
+	my $indicators = join(' ', $self->_list_indicators() );
+	$self->log->error("Indicator does not match one of $indicators!");
   }
   else{
-	if($txt eq 'StochOsc'){
-		$self->_set_indicator($self->StochOsc() );
-	}
-	elsif($txt eq 'Ma'){
-		$self->_set_indicator($self->Ma() );
-	}
-	elsif($txt eq 'StochFast'){
-		$self->_set_indicator($self->StochFast() );
-	}
+	$self->_set_indicator($self->_get_indicator($new));
+  }
 
-  }
-  $new = blessed $self->indicator();
-  if($old ne $new and $old ne ""){
-	$self->log->info("Indicator changed. Was $old, now is $new.");
-  }
+  $self->log->info("Indicator changed. Was $old, now is $new.");
 }
 
 sub _update_indicators
 {
   my ($self, $cur) = @_;
-  $self->StochOsc()->set_price($cur);
-  $self->StochFast()->set_price($cur);
-  $self->Ma()->set_price($cur);
+
+  foreach my $indicator ($self->_list_indicators()){
+	$self->_get_indicator($indicator)->set_price($cur);
+  }
 }
-
-
 
 
 sub should_buy
 {
   my $self = shift();
-  if($self->indicator()->should_buy and $self->last_action ne 'buy'){
+  if($self->cur_indicator()->should_buy and $self->last_action ne 'buy'){
 	return 1;
   }
   if(-e "/tmp/buy"){
@@ -143,7 +110,7 @@ sub should_buy
 sub should_sell
 {
   my $self = shift();
-  if($self->indicator()->should_sell and $self->last_action ne 'sell'){
+  if($self->cur_indicator()->should_sell and $self->last_action ne 'sell'){
 	return 1;
   }
   if(-e "/tmp/sell"){
