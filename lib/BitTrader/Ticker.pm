@@ -47,7 +47,7 @@ sub BUILD
 		$self->_add_indicator($indicator => $module->new() );
 	}
 
-	$self->get_indicator();
+	$self->switch_indicator();
 }
 
 sub ticker_status
@@ -60,7 +60,7 @@ sub ticker_status
 }
 
 
-sub get_indicator
+sub switch_indicator
 {
 	my $self = shift();
 	my $txt;
@@ -89,6 +89,8 @@ sub _update_indicators
 	foreach my $indicator ($self->_list_indicators()){
 		$self->_get_indicator($indicator)->set_price($cur);
 	}
+
+	$self->switch_indicator(); #see if cur_indicator has changed in config file
 }
 
 

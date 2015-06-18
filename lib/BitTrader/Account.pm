@@ -96,7 +96,6 @@ sub poll
 		elsif($t->should_sell){
 			next if( not defined $self->_sell($t,$ref) );
 		}
-		$t->get_indicator();
 	}
 	return $return;
 }
