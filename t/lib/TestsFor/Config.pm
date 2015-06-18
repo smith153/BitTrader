@@ -50,11 +50,12 @@ sub attributes : Test(2)
 	can_ok $class, "_file";
 }
 
-sub my_methods : Test(1)
+sub my_methods : Test(2)
 {
 	my $test = shift();
 	my $class = $test->class_to_test();
 	can_ok $class, 'get_var';
+	can_ok $class, 'set_var';
 }
 
 sub get_var : Test(2)
@@ -64,5 +65,16 @@ sub get_var : Test(2)
 	is $self->get_var("var1"), "testing", "var1 should be 'testing'";
 	is $self->get_var("var2"), "still testing", "var1 should be 'still testing'";
 }
+
+sub set_var : Test(1)
+{
+	my $test = shift();
+	my $self = $test->default_Config();
+
+	$self->set_var("var1", "lame");
+
+	is $self->get_var("var1"), "lame", "var1 should be 'lame'";
+}
+
 
 1;
