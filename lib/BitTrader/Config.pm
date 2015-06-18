@@ -30,4 +30,12 @@ sub get_var
 	return $txt;
 }
 
+sub set_var
+{
+	my ($self, $var, $value ) = @_;
+	die "Couldn't set $var to $value" unless $self->cfg->set($var,$value);
+}
+
 __PACKAGE__->meta->make_immutable;
+1;
+
