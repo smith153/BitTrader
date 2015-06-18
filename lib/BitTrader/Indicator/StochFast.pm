@@ -1,7 +1,7 @@
 package BitTrader::Indicator::StochFast;
-use namespace::autoclean;
 use Moose;
 use Math::SMA;
+use namespace::autoclean;
 with 'BitTrader::Indicator';
 
 has '_stoch_que' => ( is =>'ro',  isa => 'ArrayRef[Num]', default => sub {[]} ,);
