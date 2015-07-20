@@ -89,6 +89,7 @@ sub insert2
 		if( not defined $ref or not defined $ref->{last} or not $ref->{last} > 0){
 			warn get_time() . "Last not defined.\n";
 			warn get_time() . "Last not > 0. Last is: $ref->{last}\n" if( defined $ref->{last});
+			sleep(1);
 			next;
 		}
 
