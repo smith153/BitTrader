@@ -32,12 +32,12 @@ sub _update_indicator
 sub should_buy
 {
 	my $self = shift();
-	my $l    = $self->avg->last_avg();
-	my $ll   = $self->avg_slow->last_avg();
-	my $lll  = $self->avg_slower->last_avg();
-	my $llll = $self->avg_slowest->last_avg();
+	my $l    = $self->avg->ewma();
+	my $ll   = $self->avg_slow->ewma();
+	my $lll  = $self->avg_slower->ewma();
+	my $llll = $self->avg_slowest->ewma();
 
-	if($l > $ll and $ll > $lll and $lll > $llll){ #market trending
+	if($l > $ll and $ll >  $lll){ #market trending
 		return 1;
 	}
 	return 0;
@@ -47,12 +47,12 @@ sub should_buy
 sub should_sell
 {
 	my $self = shift();
-	my $l    = $self->avg->last_avg();
-	my $ll   = $self->avg_slow->last_avg();
-	my $lll  = $self->avg_slower->last_avg();
-	my $llll = $self->avg_slowest->last_avg();
+	my $l    = $self->avg->ewma();
+	my $ll   = $self->avg_slow->ewma();
+	my $lll  = $self->avg_slower->ewma();
+	my $llll = $self->avg_slowest->ewma();
 
-	if($llll > $lll and $lll > $ll and $ll > $l){#market falling
+	if( $lll > $ll and $ll > $l){#market falling
 		return 1;
 	}
 	return 0;
@@ -62,10 +62,10 @@ sub should_sell
 sub status
 {
 	my $self = shift();
-	my $l    = sprintf("%.2f", $self->avg->last_avg() );
-	my $ll   = sprintf("%.2f", $self->avg_slow->last_avg() );
-	my $lll  = sprintf("%.2f", $self->avg_slower->last_avg() );
-	my $llll = sprintf("%.2f", $self->avg_slowest->last_avg() );
+	my $l    = sprintf("%.2f", $self->avg->ewma() );
+	my $ll   = sprintf("%.2f", $self->avg_slow->ewma() );
+	my $lll  = sprintf("%.2f", $self->avg_slower->ewma() );
+	my $llll = sprintf("%.2f", $self->avg_slowest->ewma() );
 
 	return "Averages (fastest to slowest): $l, $ll, $lll, $llll\n";
 }
